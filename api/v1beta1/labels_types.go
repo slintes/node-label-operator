@@ -17,6 +17,7 @@ limitations under the License.
 package v1beta1
 
 import (
+	v1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -31,6 +32,10 @@ type LabelsSpec struct {
 	// Label defines the labels which should be set if one of the node name patterns matches
 	// Format of label must be domain/name=value
 	Labels map[string]string `json:"labels"`
+
+	// +kubebuilder:validation:EmbeddedResource
+	// +kubebuilder:pruning:PreserveUnknownFields
+	Node *v1.Node `json:"node"`
 }
 
 // LabelsStatus defines the observed state of Labels
